@@ -2,8 +2,10 @@ import { useState } from "react";
 import { usePasswordValidation } from "./hooks/usePasswordValidation";
 
 function App() {
-  const [firstPassword, setFirstPassword] = useState("");
-  const [secondPassword, setSecondPassword] = useState("");
+  const [password, setPassword] = useState({
+    firstPassword: "",
+    secondPassword: "",
+  });
 
   const [
     validLength,
@@ -13,15 +15,16 @@ function App() {
     match,
     specialChar,
   ] = usePasswordValidation({
-    firstPassword: firstPassword,
-    secondPassword: secondPassword,
+    firstPassword: password.firstPassword,
+    secondPassword: password.secondPassword,
+    requiredLength: 10,
   });
 
   const setFirst = (event) => {
-    setFirstPassword(event.target.value);
+    setPassword({ ...password, firstPassword: event.target.value });
   };
   const setSecond = (event) => {
-    setSecondPassword(event.target.value);
+    setPassword({ ...password, secondPassword: event.target.value });
   };
   return (
     <div className='App'>

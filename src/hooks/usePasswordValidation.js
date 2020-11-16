@@ -3,6 +3,14 @@ import { useState, useEffect } from "react";
 export const usePasswordValidation = ({
   firstPassword = "",
   secondPassword = "",
+  requiredLength = 8,
+  includedValidation = {
+    number: true,
+    lowercase: true,
+    uppercase: true,
+    specialcharacter: true,
+    length: true,
+  },
 }) => {
   const [validLength, setValidLength] = useState(null);
   const [hasNumber, setHasNumber] = useState(null);
@@ -12,13 +20,13 @@ export const usePasswordValidation = ({
   const [match, setMatch] = useState(null);
 
   useEffect(() => {
-    setValidLength(firstPassword.length >= 8 ? true : false);
+    setValidLength(firstPassword.length >= requiredLength ? true : false);
     setUpperCase(firstPassword.toLowerCase() !== firstPassword);
     setLowerCase(firstPassword.toUpperCase() !== firstPassword);
     setHasNumber(/\d/.test(firstPassword));
     setMatch(firstPassword && firstPassword === secondPassword);
     setSpecialChar(/[ `!@#$%^&*()_+\-=\]{};':"\\|,.<>?~]/.test(firstPassword));
-  }, [firstPassword, secondPassword]);
+  }, [firstPassword, secondPassword, requiredLength]);
 
   return [validLength, hasNumber, upperCase, lowerCase, match, specialChar];
 };
