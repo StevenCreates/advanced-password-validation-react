@@ -18,7 +18,7 @@ function App() {
     firstPassword: password.firstPassword,
     secondPassword: password.secondPassword,
     requiredLength: 10,
-    lengthValidation: false,
+    numberValidation: false,
   });
 
   const setFirst = (event) => {
@@ -51,11 +51,11 @@ function App() {
           <li>
             LowerCase: {lowerCase ? <span>True</span> : <span>False</span>}
           </li>
-          <li>Match: {match ? <span>True</span> : <span>False</span>}</li>
           <li>
             Special Character:{" "}
             {specialChar ? <span>True</span> : <span>False</span>}
           </li>
+          <li>Match: {match ? <span>True</span> : <span>False</span>}</li>
         </ul>
       </div>
     </div>
